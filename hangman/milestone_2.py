@@ -132,6 +132,18 @@ def display_hangman(tries):
     return stages[tries]
 
 
+class LetterInputter:
+    def __init__(self, letterTester):
+        self.letterTester = letterTester
+
+    def input(self, onNotValid):
+        result = raw_input('Please choose a letter: ')
+
+        if not self.letterTester.test(result):
+            return onNotValid(self)
+
+        return result
+    
 def main():
     word = get_word()
     play(word)
